@@ -24,8 +24,11 @@
       :else false)))
 
 (defn create-board 
-  [width height]
-  {:width width :height height :cells #{}})
+  "Receives a width, height and an optional set of cell positions [x y]"
+  ([width height cells]
+   {:width width :height height :cells cells})
+  ([width height]
+   {:width width :height height :cells #{}}))
 
 (defn add-cells
   [board & positions]
