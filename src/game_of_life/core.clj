@@ -21,10 +21,20 @@
         alive (contains? (:cells board) position)]
     (cond
       alive (cond
-              (< 2 live-neighbors) false
-              (<= 3 live-neighbors) true
-              (> 3 live-neighbors) false)
+              (< live-neighbors 2) false
+              (<= live-neighbors 3) true
+              (> live-neighbors 3) false)
       (= 3 live-neighbors) true
       :else false)))
 
+(defn next-tick
+  [board]
+  (let [positions (for [x (range (:width board))
+                        y (range (:height board))]
+                    [x y])]
+    (reduce (fn [next-board position]
+              (if (lives-next-tick? board position)
+                (utils/add-cell next-board position)
+                (utils/remove-cell next-board position)))
+            board positions)))
 
