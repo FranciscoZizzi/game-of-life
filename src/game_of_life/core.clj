@@ -7,15 +7,11 @@
   [& args]
   (println "Hello, World!"))
 
-(defn create-board 
-  [width height]
-  {:width width :height height :cells #{}})
-
-(defn count-live-neighbors
+(defn- count-live-neighbors
   [board position]
   (count (filter #(contains? (:cells board) %) (utils/neighbors board position))))
 
-(defn lives-next-tick?
+(defn- lives-next-tick?
   [board position]
   (let [live-neighbors (count-live-neighbors board position)
         alive (contains? (:cells board) position)]
@@ -26,6 +22,18 @@
               (> live-neighbors 3) false)
       (= 3 live-neighbors) true
       :else false)))
+
+(defn create-board 
+  [width height]
+  {:width width :height height :cells #{}})
+
+(defn add-cells
+  [board & positions]
+  (reduce utils/add-cell board positions))
+
+(defn remove-cells
+  [board & positions]
+  (reduce utils/remove-cell board positions))
 
 (defn next-tick
   [board]

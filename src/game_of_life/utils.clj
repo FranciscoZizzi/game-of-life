@@ -11,17 +11,9 @@
     (update-in board [:cells] conj position)
     board))
 
-(defn add-cells
-  [board & positions]
-  (reduce add-cell board positions))
-
 (defn remove-cell
   [board position]
   (update-in board [:cells] disj position))
-
-(defn remove-cells
-  [board & positions]
-  (reduce remove-cell board positions))
 
 (defn neighbors
   "Returns a vector with the valid adjacent positions for a given position"
