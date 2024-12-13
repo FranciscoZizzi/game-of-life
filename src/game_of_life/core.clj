@@ -2,11 +2,6 @@
   (:gen-class)
   (:require [game-of-life.utils :as utils]))
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
-
 (defn- count-live-neighbors
   [board position]
   (count (filter #(contains? (:cells board) %) (utils/neighbors board position))))
