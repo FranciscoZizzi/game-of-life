@@ -1,6 +1,5 @@
 (ns game-of-life.core-test
-  (:require [clojure.test :refer :all]
-            [game-of-life.core :refer :all]
+  (:require [clojure.test :refer [deftest, testing]]
             [game-of-life.test-utils :refer [expect-next-state]]))
 
 (deftest cell-death-1

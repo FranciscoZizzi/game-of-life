@@ -27,8 +27,8 @@
          width (count (get matrix 0))
          height (count matrix)]
     (if (>= y height)
-      {:height height :width width :cells cells}
-      (let [new-cells (if (= (get-in matrix [x y]) 'o)
+      (core/create-board width height cells)
+      (let [new-cells (if (= (get-in matrix [y x]) 'o)
                         (conj cells [x y])
                         cells)
             next-x (mod (inc x) width)
