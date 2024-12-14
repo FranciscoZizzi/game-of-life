@@ -33,6 +33,10 @@
   [board & positions]
   (reduce utils/remove-cell board positions))
 
+(defn clear-board
+  [board]
+  (reduce utils/remove-cell board (:cells board)))
+
 (defn toggle-cell
   [board position]
   (if (contains? (:cells board) position)

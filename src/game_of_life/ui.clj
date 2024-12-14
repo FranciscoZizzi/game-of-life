@@ -1,10 +1,12 @@
 (ns game-of-life.ui
   (:gen-class)
   (:require [cljfx.api :as fx]
-            [game-of-life.core :as core]))
+            [game-of-life.core :as core]
+            [clojure.math :as math]))
 
 (defonce state (atom {:title "Conway's Game of Life" 
-                      :board (core/create-board 50 50 #{[10 10] [10 9] [10 11] [9 10] [11 11]})}))
+                      :board (core/create-board 50 50 #{[10 10] [10 9] [10 11] [9 10] [11 11]})
+                      :speed-multiplier 1}))
 
 (defonce simulation (atom nil))
 
@@ -22,12 +24,11 @@
 (defn start-simulation 
   []
   (when (nil? @simulation)
-    (println "Simulation starting")
     (reset! simulation
             (future
               (loop []
                 (tick)
-                (Thread/sleep 1000)
+                (Thread/sleep (int (/ 250 (:speed-multiplier @state))))
                 (when-not (future-cancelled? @simulation)
                   (recur)))))))
 
@@ -50,14 +51,30 @@
   []
   {:fx/type :v-box
    :spacing 5
+   :padding 10
    :children [{:fx/type :label
-               :text "The game"}
-              {:fx/type :button
-               :text "Start"
-               :on-action (fn [_] (start-simulation))}
-              {:fx/type :button
-               :text "Stop"
-               :on-action (fn [_] (stop-simulation))}]})
+               :text "Speed:"}
+              {:fx/type :slider
+               :min 0.25
+               :max 2.5
+               :value (:speed-multiplier @state)
+               :on-value-changed (fn [e] (swap! state assoc :speed-multiplier e))
+               :show-tick-labels true
+               :show-tick-marks true
+               :minor-tick-count 0
+               :major-tick-unit 0.75}
+              {:fx/type :h-box
+               :spacing 5
+               :children [{:fx/type :button
+                           :text "Start"
+                           :on-action (fn [_] (start-simulation))}
+                          {:fx/type :button
+                           :text "Stop"
+                           :on-action (fn [_] (stop-simulation))}
+                          {:fx/type :button
+                           :text "Clear"
+                           :on-action (fn [_] (swap! state update :board core/clear-board))}]}
+              ]})
 
 (defn handle-click
   [[x y]]
