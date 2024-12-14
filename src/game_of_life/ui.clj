@@ -15,19 +15,21 @@
 (defn stop-simulation
   []
   (when @simulation
+    (println "Simulation stopping")
     (future-cancel @simulation)
     (reset! simulation nil)))
 
-(defn start-simulation
+(defn start-simulation 
   []
-  (stop-simulation)
-  (reset! simulation
-          (future
-            (loop []
-              (when-not (future-cancelled? @simulation)
+  (when (nil? @simulation)
+    (println "Simulation starting")
+    (reset! simulation
+            (future
+              (loop []
                 (tick)
                 (Thread/sleep 1000)
-                (recur))))))
+                (when-not (future-cancelled? @simulation)
+                  (recur)))))))
 
 (defn render-grid 
   [board]
@@ -52,10 +54,10 @@
                :text "The game"}
               {:fx/type :button
                :text "Start"
-               :on-action (fn [_] (println "Started")(start-simulation))}
+               :on-action (fn [_] (start-simulation))}
               {:fx/type :button
                :text "Stop"
-               :on-action (fn [_] (println "Stopped")(stop-simulation))}]})
+               :on-action (fn [_] (stop-simulation))}]})
 
 (defn handle-click
   [[x y]]
