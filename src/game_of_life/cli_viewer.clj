@@ -34,7 +34,7 @@
       [(Integer. x) (Integer. y)]
       (throw (IllegalArgumentException. "Invalid input format")))))
 
-(defn -main 
+(defn run
   []
   (loop [board (create-board 10 10)
          message ""]
