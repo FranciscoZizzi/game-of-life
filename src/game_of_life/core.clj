@@ -33,6 +33,12 @@
   [board & positions]
   (reduce utils/remove-cell board positions))
 
+(defn toggle-cell
+  [board position]
+  (if (contains? (:cells board) position)
+    (utils/remove-cell board position)
+    (utils/add-cell board position)))
+
 (defn next-tick
   [board]
   (let [positions (for [x (range (:width board))
