@@ -2,6 +2,8 @@
 
 An implementation of Conway's Game of Life in Clojure with a user interface made with cljfx
 
+<img title="a title" alt="Alt text" width=500 src="https://github.com/FranciscoZizzi/game-of-life/blob/resources/resources/ui.png">
+
 ## Installation and Usage
 
 ### Download the jar file directly
