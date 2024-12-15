@@ -6,7 +6,7 @@ An implementation of Conway's Game of Life in Clojure with a user interface made
 
 ### Download the jar file directly
 
-Download the jar file from https://github.com/FranciscoZizzi/game-of-life/releases/download/v1.0.0/game-of-life-1.0.0.jar
+Download the jar file from https://github.com/FranciscoZizzi/game-of-life/releases/download/v1.0.0/game-of-life-1.0.0-standalone.jar
 
 Then execute it with:
 
