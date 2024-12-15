@@ -12,6 +12,8 @@ Then execute it with:
 
     $ java -jar game-of-life-1.0.0.jar
 
+You might need to install JavaFX to excecute it correctly.
+
 ### Clone the repo and compile it yourself
 
 #### Requirements
