@@ -1,32 +1,30 @@
 # game-of-life
 
-FIXME: description
+An implementation of Conway's Game of Life in Clojure with a user interface made with cljfx
 
-## Installation
+## Installation and Usage
 
-Download from http://example.com/FIXME.
+### Download the jar file directly
 
-## Usage
+Download the jar file from https://github.com/FranciscoZizzi/game-of-life/releases/download/v1.0.0/game-of-life-1.0.0.jar\
+Then execute it with:
 
-FIXME: explanation
+    $ java -jar game-of-life-1.0.0.jar
 
-    $ java -jar game-of-life-0.1.0-standalone.jar [args]
+### Clone the repo and compile it yourself
 
-## Options
+#### Requirements
+1. Java
+2. Clojure
+3. Leiningen
 
-FIXME: listing of options this app accepts.
+Clone the repository and run:
 
-## Examples
+    $ lein uberjar
 
-...
+Then execute the jar file:
 
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+    $ java -jar target/uberjar/game-of-life-1.0.0-standalone.jar
 
 ## License
 
